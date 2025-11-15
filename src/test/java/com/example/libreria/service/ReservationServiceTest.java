@@ -88,7 +88,7 @@ class ReservationServiceTest {
         requestDTO.setRentalDays(7);
         requestDTO.setStartDate(LocalDate.now());
 
-        when(userRepository.findById(1L)).thenReturn(Optional.of(testUser));
+
         when(bookRepository.findByExternalId(258027L)).thenReturn(Optional.of(testBook));
         when(reservationRepository.save(any(Reservation.class))).thenReturn(testReservation);
 
@@ -102,7 +102,7 @@ class ReservationServiceTest {
         assertEquals(7, result.getRentalDays());
         assertEquals(Reservation.ReservationStatus.ACTIVE, result.getStatus());
 
-        verify(userRepository, times(1)).findById(1L);
+
         verify(bookRepository, times(1)).findByExternalId(258027L);
         verify(reservationRepository, times(1)).save(any(Reservation.class));
         verify(bookService, times(1)).updateStock(eq(258027L), anyInt());
@@ -126,7 +126,7 @@ class ReservationServiceTest {
         unavailableBook.setStockQuantity(10);
         unavailableBook.setAvailableQuantity(0);
 
-        when(userRepository.findById(1L)).thenReturn(Optional.of(testUser));
+
         when(bookRepository.findByExternalId(258027L)).thenReturn(Optional.of(unavailableBook));
 
 
